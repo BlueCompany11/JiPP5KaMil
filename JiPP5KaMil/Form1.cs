@@ -86,10 +86,9 @@ namespace JiPP5KaMil
                 //resultAnimation to task ktory od razu sie uruchamia przy wywolaniu i kod leci dalej, a animacja sie znajduje w innym watku
                 ResultAnimation(true);
                 //zapisz rezultat i otworz tabele z wynikami
-                Console.WriteLine(comboBoxPlayers.SelectedItem.ToString());
-                Console.WriteLine(comboBoxSeconds.SelectedItem.ToString());
-                DodajWynik(TimeSpan.FromSeconds(amountOfSeconds).TotalMilliseconds - (int)sw.ElapsedMilliseconds,
-                    comboBoxPlayers.SelectedItem.ToString(), amountOfSeconds);
+                //(TimeSpan.FromSeconds(amountOfSeconds).TotalMilliseconds -
+                DodajWynik((sw.ElapsedMilliseconds),
+                    comboBoxPlayers.SelectedItem.ToString(), amountOfSeconds*1000);
             }
             else
             {
@@ -132,8 +131,8 @@ namespace JiPP5KaMil
             Scoreboard scoreboard = new Scoreboard { idGracza = gracz.id, limitCzasowy = limitCzasowyGry, czasGracza = czasGracza, dataRozgrywki = DateTime.Now };
             model1.Scoreboards.Add(scoreboard);
             model1.SaveChanges();
-            //var TablicaWynikow = new ScoreboadForm();
-            //TablicaWynikow.Show();
+            var TablicaWynikow = new ScoreboadForm();
+            TablicaWynikow.Show();
             //POPRAWIC NA AUTOINCEMENT KEY W SCOREBOARD I JESZCZE RAZ EF POSTAWIC
         }
         
