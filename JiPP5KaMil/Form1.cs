@@ -136,6 +136,6 @@ namespace JiPP5KaMil
             //TablicaWynikow.Show();
             //POPRAWIC NA AUTOINCEMENT KEY W SCOREBOARD I JESZCZE RAZ EF POSTAWIC
         }
-
+        
     }
 }
