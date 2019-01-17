@@ -85,12 +85,11 @@ namespace JiPP5KaMil
                 //nie uzywam timera tylko asynchronicznosci
                 //resultAnimation to task ktory od razu sie uruchamia przy wywolaniu i kod leci dalej, a animacja sie znajduje w innym watku
                 ResultAnimation(true);
-                //ScoreboardForm scoreboardForm = new ScoreboardForm((int)TimeSpan.FromSeconds(amountOfSeconds).TotalMilliseconds - (int)sw.ElapsedMilliseconds);
-                ////okienko scoreboardform ma zdarzenie IncorrectNickHandler
-                //// podpinamy do niego funkcje - gdy zostanite do zdarzenie wywolane - czyli osoba wcisnie przycisk na tamtym okienku nie 
-                //// wprowadzajac nicku
-                //scoreboardForm.IncorrectNickHandler += ScoreboardForm_IncorrectNickHandler;
-                //scoreboardForm.Show();
+                //zapisz rezultat i otworz tabele z wynikami
+                Console.WriteLine(comboBoxPlayers.SelectedItem.ToString());
+                Console.WriteLine(comboBoxSeconds.SelectedItem.ToString());
+                DodajWynik(TimeSpan.FromSeconds(amountOfSeconds).TotalMilliseconds - (int)sw.ElapsedMilliseconds,
+                    comboBoxPlayers.SelectedItem.ToString(), amountOfSeconds);
             }
             else
             {
@@ -122,5 +121,21 @@ namespace JiPP5KaMil
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }
         }
+
+        private void DodajWynik(double czasGracza, string aktualnyNick, int limitCzasowyGry)
+        {
+            //string aktualnyNick = comboBoxPlayers.SelectedValue.ToString();
+            //int limitCzasowyGry = Convert.ToInt32(comboBoxSeconds.SelectedValue.ToString());
+            Console.WriteLine("asd");
+            var listaPlayerow = model1.Players.Where(x => x.nick == aktualnyNick).ToList();
+            Player gracz = listaPlayerow[0];
+            Scoreboard scoreboard = new Scoreboard { idGracza = gracz.id, limitCzasowy = limitCzasowyGry, czasGracza = czasGracza, dataRozgrywki = DateTime.Now };
+            model1.Scoreboards.Add(scoreboard);
+            model1.SaveChanges();
+            //var TablicaWynikow = new ScoreboadForm();
+            //TablicaWynikow.Show();
+            //POPRAWIC NA AUTOINCEMENT KEY W SCOREBOARD I JESZCZE RAZ EF POSTAWIC
+        }
+
     }
 }

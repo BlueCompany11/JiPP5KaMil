@@ -9,7 +9,7 @@ namespace JiPP5KaMil
     [Table("JiPPkmiloszewska.Scoreboard")]
     public partial class Scoreboard
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         public int idGracza { get; set; }
